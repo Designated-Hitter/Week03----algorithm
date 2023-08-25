@@ -1,17 +1,15 @@
+#dp 리스트에 저장해야 할 것: 각 배열에서 출발했을 때 만들 수 있는 가장 긴 증가하는 수열
 import sys
 input = sys.stdin.readline
 
 A = int(input())
-B = [0] + list(map(int, input().split()))
-print(B)
-dp = [0] * (A + 1)
+B = list(map(int, input().split()))
 
-for i in range(1, B - 1):
-    max = B[i]
-    
-    if B[i + 1] > max:
-        max = B[i + 1]
-        dp[i] =  dp[i] + 1
+dp = [1] * (A)
 
+for i in range(1, A):
+    for j in range(i):
+        if B[i] > B[j]:
+            dp[i] = max(dp[i], dp[j] + 1)
 
-
+print(max(dp))
