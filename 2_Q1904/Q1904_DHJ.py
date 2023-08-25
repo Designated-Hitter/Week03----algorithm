@@ -13,3 +13,6 @@ for k in range(3, N + 1):
     dp[k] = (dp[k-1] + dp[k-2]) % 15746
 
 print(dp[N])
+
+#메모리: 69788 KB
+#시간: 340 ms

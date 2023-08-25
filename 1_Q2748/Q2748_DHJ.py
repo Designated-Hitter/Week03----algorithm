@@ -13,3 +13,6 @@ answer = []
 for num in fibonacci_generator(n):
     answer.append(num)
 print(answer[-1])
+
+#메모리: 31256 KB
+#시간: 44 ms 
