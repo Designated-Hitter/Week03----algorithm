@@ -5,7 +5,7 @@ input = sys.stdin.readline
 A = int(input())
 B = list(map(int, input().split()))
 
-dp = [1] * (A)
+dp = [0] * (A)
 
 for i in range(1, A):
     for j in range(i):
