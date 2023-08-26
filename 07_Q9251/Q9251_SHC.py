@@ -2,24 +2,20 @@
 LCS
 """
 
-from functools import lru_cache
-from sys import setrecursionlimit
 
-setrecursionlimit(10**8)
-
-
-@lru_cache(256)
 def LCS(X: str, Y: str) -> int:
     """X와 Y의 최장 공통부분수열의 길이를 구한다."""
-    if len(X) == 0 or len(Y) == 0:
-        return 0
-
-    if X[-1] == Y[-1]:
-        # 두 접두어가 같은 문자로 끝난다 => LCS의 멤버임이 확실
-        return LCS(X[:-1], Y[:-1]) + 1
-    # 두 접두어가 다른 문자로 끝난다. xn을 살리는 쪽과 yn을 살리는 쪽
-    # 둘 중에 더 긴 녀석을 선택한다.
-    return max(LCS(X[:-1], Y), LCS(X, Y[:-1]))
+    # ∵ 빈 수열도 비교해야 하기 때문. (초기조건)
+    X = " " + X
+    Y = " " + Y
+    dp = [[0 for _ in range(len(Y))] for _ in range(len(X))]
+    for i in range(1, len(X)):
+        for j in range(1, len(Y)):
+            if X[i] == Y[j]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[-1][-1]
 
 
 if __name__ == "__main__":
