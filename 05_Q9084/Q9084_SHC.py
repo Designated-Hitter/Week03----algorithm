@@ -2,25 +2,22 @@
 동전
 """
 
-from functools import cache
+from sys import stdin
 
+if __name__ == "__main__":
+    t = int(stdin.readline().strip())
 
-def sol(cost: int, coins: list[int]) -> int:
-    ...
+    for _ in range(t):
+        n = int(stdin.readline().strip())
+        g_coins = sorted(int(x) for x in stdin.readline().split())
+        m = int(stdin.readline().strip())
 
+        dp = [0 for _ in range(m + 1)]
+        dp[0] = 1
+        for i in range(n):
+            # 동전 i까지의 dp에 대하여
+            for j in range(g_coins[i], m + 1):
+                # j만큼의 금액에 대하여
+                dp[j] += dp[j - g_coins[i]]
 
-g_coins = []
-
-
-@cache
-def r_sol(n: int, k: int) -> int:
-    """
-    dp[n][k]: n원을 만들기 위해 0~k번째 동전을 사용하는 경우의 수
-    """
-    if k == 0:
-        return 1
-
-    result = 0
-    for coin in g_coins:
-        result += r_sol(n - coin, k - 1)
-    return result
+        print(dp[m])
