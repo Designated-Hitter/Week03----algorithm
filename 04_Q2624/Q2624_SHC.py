@@ -20,25 +20,34 @@ def sol(t: int, coins: list[tuple[Val, Amt]]) -> int:
 
     """
     coins.sort(key=lambda tup: tup[0])
-    # row = 목표금액 'n'
-    # col = 사용할 동전의 종류, 1번부터 'k' 까지
-    dp = [[0 for _ in range(len(coins))] for _ in range(t + 1)]
 
-    # dp[n][0] 부터 채우자
-    for n in range(t + 1):
-        dp[n][0] = 1 if n <= coins[0][1] else 0
+    COL = len(coins)  # coin의 종류
+    ROW = t + 1  # 금액
 
-    # 그리고 row를 우선적으로 채워나가면서 문제를 풀어보자.
-    for k in range(1, len(coins)):
-        coin_value = coins[k][0]
-        coin_amount = coins[k][1]
-        for n in range(t + 1):
-            for amt in range(coin_amount + 1):
-                total_value = coin_value * amt
-                if total_value <= n:
-                    dp[n][k] += dp[n - total_value][k - 1]
+    dp = [[0 for _ in range(COL)] for _ in range(ROW)]
 
-    return dp[t][len(coins) - 1]
+    # 0's COL을 먼저 채우자
+    coin0 = coins[0]
+    cnt = 0
+    for r in range(ROW):
+        if cnt <= coin0[1] and r % coin0[0] == 0:
+            # 개수가 모자라도 안되고 r의 약수가 아니어도 안된다.
+            cnt += 1
+            dp[r][0] = 1
+        else:
+            dp[r][0] = 0
+    del cnt
+
+    # 1's COL부터 차근차근
+    for c in range(1, COL):
+        coin_val = coins[c][0]
+        coin_amt = coins[c][1]
+
+        for r in range(ROW):
+            for cnt in range(min(r // coin_val, coin_amt) + 1):
+                coin_acc = coin_val * cnt  # 0 inclusive
+                dp[r][c] += dp[r - coin_acc][c - 1]
+    return dp[ROW - 1][COL - 1]
 
 
 if __name__ == "__main__":
