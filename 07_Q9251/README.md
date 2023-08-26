@@ -62,3 +62,5 @@ def LCS(X: str, Y: str) -> int:
     return dp[-1][-1]
 
 ```
+
+![LCS](../media/IMG_2714.jpg)
