@@ -2,13 +2,13 @@
 LCS
 """
 
-from functools import cache
+from functools import lru_cache
 from sys import setrecursionlimit
 
 setrecursionlimit(10**8)
 
 
-@cache
+@lru_cache(256)
 def LCS(X: str, Y: str) -> int:
     """X와 Y의 최장 공통부분수열의 길이를 구한다."""
     if len(X) == 0 or len(Y) == 0:
