@@ -20,6 +20,7 @@ def djbc2(s: str) -> int:
 
 
 def sol(S: str, A: Sequence[str]) -> bool:
+    # left to right
     start = 0
     end = 1
     A_HASH = {djbc2(a) for a in A}
@@ -29,7 +30,19 @@ def sol(S: str, A: Sequence[str]) -> bool:
         if djbc2(sample) in A_HASH:
             start = end
         end += 1
-    return start == end - 1
+    if start == end - 1:
+        return True
+
+    # right to left
+    rstart = len(S)
+    rend = len(S) - 1
+    while rend >= 0:
+        sample = S[rend:rstart]
+        if djbc2(sample) in A_HASH:
+            rstart = rend
+        rend -= 1
+
+    return rstart == rend + 1
 
 
 if __name__ == "__main__":
