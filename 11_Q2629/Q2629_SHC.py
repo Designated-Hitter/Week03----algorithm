@@ -19,7 +19,7 @@ def r_sol(N: int, idx: int, weight: int):
 
     g_visited[idx][weight] = True
 
-    if not (0 <= idx < N):
+    if not (idx < N):
         return
 
     r_sol(N, idx + 1, weight + W[idx + 1])  # 추에 무게를 더하는 경우
