@@ -7,7 +7,7 @@ problem_list = []
 
 for _ in range(N):
     deadline, cup_ramen = map(int, input().split())
-    problem_list.append([deadline, cup_ramen])
+    problem_list.append([deadline, cup_ramen])https://www.msn.com/ko-kr/news/other/%EA%B9%80%EB%82%98%EC%98%81-%EA%B2%BD%EC%82%AC%EA%B0%80-%EC%9E%88%EC%97%88%EB%8B%A4-%EB%9F%B0%EB%8D%98%EC%97%90%EC%84%9C-%EC%95%A0%EA%B8%B0%EB%A5%BC-%EB%82%B3%EC%95%98%EC%96%B4%EC%9A%94/ar-AA1fRcaL?cvid=b527579aa43d406facf2f6ba51548187
 
 # print(problem_list)
 
