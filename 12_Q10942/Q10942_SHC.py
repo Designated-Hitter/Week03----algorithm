@@ -28,5 +28,5 @@ if __name__ == "__main__":
             if N[s] == N[e] and g_dp[s + 1][e - 1]:
                 g_dp[s][e] = True
 
-    for s, e in ([int(x) - 1 for x in stdin.readline().split()] for _ in range(m)):
+    for s, e in ((int(x) - 1 for x in stdin.readline().split()) for _ in range(m)):
         print(1 if g_dp[s][e] else 0)
