@@ -14,7 +14,7 @@ for _ in range(N):
 problem_list.sort(key= lambda x:x[0])
 #힙을 활용하여 데드 라인 내에서 최대 컵라면 수를 구함
 cup_ramen_heap = []
-
+#-------------------------------이 부분이 잘 이해가 안감. openAI가 짜줌
 for problem in problem_list:
     heapq.heappush(cup_ramen_heap, problem[1]) #problem[1]은 각 문제의 컵라면 개수
     if len(cup_ramen_heap) > problem[0]:  #problem[0]은 각 문제의 데드라인, 데드라인을 초과하는 문제는 힙에서 제거
