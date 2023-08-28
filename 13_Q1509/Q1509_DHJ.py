@@ -19,7 +19,7 @@ for k in range(3, L + 1): #길이 3이상 팰린드롬
         end = start + k - 1
         if str_list[start] == str_list[end] and is_p[start + 1][end - 1]:
             is_p[start][end] = 1
-
+            #---------------------------------여기서부터 잘 몰루겠음
 for end in range(L):
     for start in range(end + 1):
         if is_p[start][end]:
