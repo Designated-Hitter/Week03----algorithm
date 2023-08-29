@@ -48,16 +48,18 @@ def sol(n: int, k: int, order: Iterable[int]) -> int:
     maxheap: list[Gadgetry] = []
     cnt = 0
     for gadget in gadgetries:
+        is_updated = False
+        for i in range(len(maxheap)):
+            if maxheap[i] == gadget:
+                maxheap[i] = gadget
+                heapify(maxheap)
+                is_updated = True
+                break
+
+        if is_updated:
+            continue
+
         if len(maxheap) > n - 1:
-            is_updated = False
-            for i in range(len(maxheap)):
-                if maxheap[i] == gadget:
-                    maxheap[i] = gadget
-                    is_updated = True
-                    heapify(maxheap)
-                    break
-            if is_updated:
-                continue
             cnt += 1
             heappop(maxheap)
         heappush(maxheap, gadget)
