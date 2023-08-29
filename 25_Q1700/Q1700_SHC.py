@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 from heapq import heapify, heappop, heappush
 from sys import stdin
-from typing import Self
+from typing import Iterable, Self
 
 INF = 1 << 31
 
@@ -28,12 +28,11 @@ class Gadgetry:
         return o < self
 
 
-if __name__ == "__main__":
-    n, k = [int(x) for x in stdin.readline().split()]
-    tmp_cnt: dict[int, int] = {}  # 임시로 occurrence를 측정하기 위해 사용하는 변수
+def sol(n: int, k: int, order: Iterable[int]) -> int:
+    tmp_cnt: dict[int, int] = {}
     gadgetries: list[Gadgetry] = []
 
-    for idx, gadget_id in enumerate(int(x) for x in stdin.readline().split()):
+    for idx, gadget_id in enumerate(order):
         if gadget_id not in tmp_cnt:
             tmp_cnt[gadget_id] = idx
         if tmp_cnt[gadget_id] < idx:
@@ -61,4 +60,14 @@ if __name__ == "__main__":
             heappop(maxheap)
         heappush(maxheap, gadget)
 
-    print(cnt)
+    return cnt
+
+
+if __name__ == "__main__":
+    n, k = [int(x) for x in stdin.readline().split()]
+    tmp_cnt: dict[int, int] = {}  # 임시로 occurrence를 측정하기 위해 사용하는 변수
+    gadgetries: list[Gadgetry] = []
+
+    answer = sol(n, k, (int(x) for x in stdin.readline().split()))
+
+    print(answer)
