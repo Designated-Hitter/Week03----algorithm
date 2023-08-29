@@ -11,12 +11,10 @@ for _ in range(M):
     small_stone = int(input())
     small_stones.append(small_stone)
 
-print(small_stones)
 dp = [[float('inf')] * (int((2*N)**0.5) + 2) for _ in range(N + 1)]
 #(2*N) ** 0.5) + 1은 첫째항이 1이고 공차가 1인 등차수열에서 수열의 합이 N이 될 때 마지막 항의 근사값, 즉 돌의 갯수가 N개일 때 나올 수 있는 속도의 최대값에 가까운 값
+#최대 속도의 정확한 값이 필요한 것이 아니라 이 이상 넘어설 수 없는 최대값을 (계산하기 더 편하게 정수로) 대충이나마 설정하는 것이 더 중요하기 때문에 정확한 값보다 더 큰 근사값을 설정
 dp[1][0] = 0
-
-print(dp)
 
 for i in range(2, N + 1):
     if i in small_stones:
