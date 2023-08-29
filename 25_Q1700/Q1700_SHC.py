@@ -27,21 +27,23 @@ class Gadgetry:
     def __gt__(self, o: Self) -> bool:
         return o < self
 
+    def __repr__(self) -> str:
+        return f"({self.id}, {self.occurrence})"
+
 
 def sol(n: int, k: int, order: Iterable[int]) -> int:
-    tmp_cnt: dict[int, int] = {}
+    order = list(order)
     gadgetries: list[Gadgetry] = []
 
-    for idx, gadget_id in enumerate(order):
-        if gadget_id not in tmp_cnt:
-            tmp_cnt[gadget_id] = idx
-        if tmp_cnt[gadget_id] < idx:
-            gadgetries.append(Gadgetry(gadget_id, idx - tmp_cnt[gadget_id]))
-        tmp_cnt[gadget_id] = idx
-
-    # Infinities
-    for gadget_id in tmp_cnt.keys():
-        gadgetries.append(Gadgetry(gadget_id, INF))
+    for i in range(len(order)):
+        j = i + 1
+        while j < len(order):
+            if order[i] == order[j]:
+                break
+            j += 1
+        if j == len(order):
+            j = INF
+        gadgetries.append(Gadgetry(order[i], j - i))
 
     maxheap: list[Gadgetry] = []
     cnt = 0
