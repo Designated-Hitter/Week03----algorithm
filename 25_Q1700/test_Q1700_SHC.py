@@ -4,7 +4,7 @@ from unittest import TestCase
 
 class Test(TestCase):
     def do_test(self, n, k, order, answer):
-        submit = Q1700_SHC.sol(n, k, order)
+        submit = Q1700_SHC.sol2(n, k, order)
         self.assertEqual(answer, submit)
 
     def test_1(self):

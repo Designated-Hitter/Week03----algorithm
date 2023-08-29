@@ -67,11 +67,50 @@ def sol(n: int, k: int, order: Iterable[int]) -> int:
     return cnt
 
 
+def find_latest_used(plugs: set[int], order: list[int]) -> int:
+    """
+    - return: plugs 안에 있는 원소들 중 출현시기가 가장 늦는 (혹은 아예 없는) 원소번호를 리턴한다.
+    """
+    n = len(order)
+    result = 0
+    max_idx = -1
+
+    for num in plugs:
+        try:
+            num_idx = order.index(num)
+        except ValueError:
+            num_idx = n
+        if max_idx < num_idx:
+            max_idx = num_idx
+            result = num
+
+    return result
+
+
+def sol2(n: int, k: int, order: Iterable[int]) -> int:
+    """빈도수가 아니라 출현 시기를 기준으로 다시 풀기"""
+    order = list(order)
+    plugs: set[int] = set()
+    cnt = 0
+
+    for idx, gadget_id in enumerate(order):
+        plugs.add(gadget_id)
+
+        if len(plugs) <= n:
+            continue
+
+        cnt += 1
+        latest_used = find_latest_used(plugs, order[idx:])
+        plugs.discard(latest_used)
+
+    return cnt
+
+
 if __name__ == "__main__":
     n, k = [int(x) for x in stdin.readline().split()]
     tmp_cnt: dict[int, int] = {}  # 임시로 occurrence를 측정하기 위해 사용하는 변수
     gadgetries: list[Gadgetry] = []
 
-    answer = sol(n, k, (int(x) for x in stdin.readline().split()))
+    answer = sol2(n, k, (int(x) for x in stdin.readline().split()))
 
     print(answer)
