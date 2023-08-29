@@ -20,3 +20,5 @@ for i in range(len(weight)):
     for j in range(M, 0, -1):
         if j >= weight[i]:
             dp[j] = max(dp[j], dp[j-weight[i]] + utility[i])
+
+print(dp[M])
